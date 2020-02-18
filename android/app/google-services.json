@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "67111292969",
+    "firebase_url": "https://cardetailsapp.firebaseio.com",
+    "project_id": "cardetailsapp",
+    "storage_bucket": "cardetailsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67111292969:android:0432665331e79c50d2cc38",
+        "android_client_info": {
+          "package_name": "com.example.car_details_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67111292969-t6mb1ucr59961t0lm7s88g72fr5hcukv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaNEYRty1w_Jhc82bSMjDOnbMqXVayx5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67111292969-t6mb1ucr59961t0lm7s88g72fr5hcukv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
