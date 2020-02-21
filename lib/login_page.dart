@@ -20,18 +20,41 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 30.0),
-                TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                        hintText:"Enter email"
-                    )
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 100.0),
+                  Text("Login", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0
+                  )),
+                  SizedBox(height: 20.0),
+                  TextField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                          hintText:"Enter email"
+                      )
+                  ),
+                  SizedBox(height:10.0),
+                  TextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText:"Enter password"
+                      )
+                  ),
+                  SizedBox(height: 10.0),
+                  RaisedButton(
+                    child: Text("Login"),
+                    onPressed: (){
+                      print("Login Button Pressed");
+                    },
+                  )
 
-                )
-              ],
+                ],
+              ),
             )
         )
     );
