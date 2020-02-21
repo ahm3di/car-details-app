@@ -1,4 +1,5 @@
 
+import 'package:car_details_app/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -48,8 +49,15 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 10.0),
                   RaisedButton(
                     child: Text("Login"),
-                    onPressed: (){
-                      print("Login Button Pressed");
+                    onPressed: () async{
+                      if (_emailController.text.isEmpty || _passwordController.text.isEmpty){
+                        print("Email and password is empty");
+                        return;
+                      }
+                      bool result = await Auth().signInWithEmail(_emailController.text, _passwordController.text);
+                      if (!result){
+                        print("Login failed");
+                      }
                     },
                   )
 
