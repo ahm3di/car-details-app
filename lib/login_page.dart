@@ -1,6 +1,7 @@
 
 import 'package:car_details_app/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -59,8 +60,15 @@ class _LoginPageState extends State<LoginPage> {
                         print("Login failed");
                       }
                     },
-                  )
-
+                  ),
+                  SignInButton(
+                    Buttons.GoogleDark,
+                    onPressed: () async {
+                      bool result = await  AuthProvider().loginWithGoogle();
+                      if(!result)
+                        print("Error logging in with google");
+                    },
+                  ),
                 ],
               ),
             )
