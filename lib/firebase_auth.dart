@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class Auth {
+class AuthProvider {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Future<bool> signInWithEmail(String email, String password) async{
     try {
@@ -13,6 +13,14 @@ class Auth {
         return false;
     }catch (e){
       return false;
+    }
+  }
+
+  Future<void> logOut() async {
+    try {
+      await _auth.signOut();
+    }catch (e) {
+      print("error while logging out");
     }
 
   }

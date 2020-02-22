@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                         print("Email and password is empty");
                         return;
                       }
-                      bool result = await Auth().signInWithEmail(_emailController.text, _passwordController.text);
+                      bool result = await AuthProvider().signInWithEmail(_emailController.text.trim(), _passwordController.text);
                       if (!result){
                         print("Login failed");
                       }
