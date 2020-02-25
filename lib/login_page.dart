@@ -1,77 +1,47 @@
-
-import 'package:car_details_app/firebase_auth.dart';
+import 'package:car_details_app/home.dart';
+import 'package:car_details_app/email_login.dart';
+import 'package:car_details_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:car_details_app/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginOptions extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginOptionsState createState() => _LoginOptionsState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailController;
-  TextEditingController _passwordController;
-
-  @override
-  void initState(){
-    super.initState();
-    _emailController = TextEditingController(text: "");
-    _passwordController = TextEditingController(text: "");
-  }
+class _LoginOptionsState extends State<LoginOptions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(height: 100.0),
-                  Text("Login", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0
-                  )),
-                  SizedBox(height: 20.0),
-                  TextField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                          hintText:"Enter email"
-                      )
-                  ),
-                  SizedBox(height:10.0),
-                  TextField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          hintText:"Enter password"
-                      )
-                  ),
-                  SizedBox(height: 10.0),
-                  RaisedButton(
-                    child: Text("Login"),
-                    onPressed: () async{
-                      if (_emailController.text.isEmpty || _passwordController.text.isEmpty){
-                        print("Email and password is empty");
-                        return;
-                      }
-                      bool result = await AuthProvider().signInWithEmail(_emailController.text.trim(), _passwordController.text);
-                      if (!result){
-                        print("Login failed");
-                      }
-                    },
-                  ),
-                  SignInButton(
-                    Buttons.GoogleDark,
-                    onPressed: () async {
-                      bool result = await  AuthProvider().loginWithGoogle();
-                      if(!result)
-                        print("Error logging in with google");
-                    },
-                  ),
-                ],
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 100.0),
+              Text("Welcome", style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0
+              )),
+              SizedBox(height: 20.0),
+              SignInButton(
+                Buttons.Email,
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                },
               ),
-            )
+              SignInButton(
+                Buttons.GoogleDark,
+                onPressed: () async {
+                  bool result = await  AuthProvider().loginWithGoogle();
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainScreen()));
+                  if(!result)
+                    print("Error logging in with google");
+                },
+              ),
+            ],
+          ),
         )
     );
   }

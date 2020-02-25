@@ -1,10 +1,8 @@
+import 'package:car_details_app/login_page.dart';
 import 'package:car_details_app/home.dart';
 import 'package:car_details_app/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-
-import 'login_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,7 +29,7 @@ class MainScreen extends StatelessWidget {
         if(snapshot.connectionState == ConnectionState.waiting)
           return SplashPage();
         if(!snapshot.hasData || snapshot.hasData == null)
-          return LoginPage();
+          return LoginOptions();
         return HomePage();
       },
     );

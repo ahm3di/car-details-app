@@ -9,7 +9,7 @@ class AuthProvider {
       AuthResult result = await _auth.signInWithEmailAndPassword
         (email: email, password: password);
       FirebaseUser user = result.user;
-      if(user != null)
+      if(user != null && user.isEmailVerified)
       return true;
       else
         return false;
@@ -44,4 +44,22 @@ class AuthProvider {
       return false;
     }
   }
+
+  final FirebaseAuth _registerAuth = FirebaseAuth.instance;
+  Future<bool> signUpWithEmailAndPassword(String email, String password) async{
+    try {
+      AuthResult result = await _registerAuth.createUserWithEmailAndPassword
+        (email: email, password: password);
+      FirebaseUser user = result.user;
+      user.sendEmailVerification();
+      if(user != null)
+        return true;
+      else
+        return false;
+    }catch (e){
+      return false;
+    }
+  }
+
 }
+
