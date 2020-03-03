@@ -1,3 +1,5 @@
+import 'package:car_details_app/email_login.dart';
+import 'package:car_details_app/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:car_details_app/firebase_auth.dart';
@@ -49,12 +51,14 @@ class _RegisterEmailState extends State<RegisterEmail> {
                         bool result = await AuthProvider().signUpWithEmailAndPassword(
                             _emailController.text.trim(), _passwordController.text.trim());
 
-                        if (result)
+                        if (result) {
                           print("User registered");
                           Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => MainScreen()  ));
-                        print("Error while registering user");
-
+                              MaterialPageRoute(builder: (context) =>
+                                  EmailLogin()));
+                        }
+                        else
+                          print("Error while registering user");
                       },
                     )
                   ])

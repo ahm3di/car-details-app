@@ -28,7 +28,7 @@ class _LoginOptionsState extends State<LoginOptions> {
               SignInButton(
                 Buttons.Email,
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => EmailLogin()));
                 },
               ),
               SignInButton(
