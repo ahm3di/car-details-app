@@ -22,6 +22,7 @@ dependencies:
   google_sign_in: ^4.1.1
   firebase_auth: ^0.15.4
   flutter_signin_button: ^1.0.0
+  google_maps_flutter: ^0.5.24+1
 #  firebase_core: ^0.4.4
 #  firebase_analytics: ^5.0.11
 #  cloud_firestore: ^0.13.3
