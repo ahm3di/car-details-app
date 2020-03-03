@@ -3,15 +3,17 @@ import 'package:car_details_app/home.dart';
 import 'package:car_details_app/login_page.dart';
 import 'package:car_details_app/main.dart';
 import 'package:car_details_app/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-class LoginPage extends StatefulWidget {
+class EmailLogin extends StatefulWidget {
+
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _EmailLoginState createState() => _EmailLoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _EmailLoginState extends State<EmailLogin> {
   TextEditingController _emailController;
   TextEditingController _passwordController;
 
@@ -55,10 +57,11 @@ class _LoginPageState extends State<LoginPage> {
                 }
                 bool result = await AuthProvider().signInWithEmail(
                     _emailController.text.trim(), _passwordController.text.trim());
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => MainScreen()  ));
-                if (!result) {
-                  print("Login failed");
+                if (result){
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => HomePage()  ));}
+                else{
+                  print("Problem signing in, please make sure your email is verified!");
                 }
               },
             ),
