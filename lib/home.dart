@@ -1,6 +1,5 @@
 import 'package:car_details_app/firebase_auth.dart';
 import 'package:car_details_app/login_page.dart';
-import 'package:car_details_app/main.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

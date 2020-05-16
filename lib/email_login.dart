@@ -1,11 +1,7 @@
 import 'package:car_details_app/firebase_auth.dart';
 import 'package:car_details_app/home.dart';
-import 'package:car_details_app/login_page.dart';
-import 'package:car_details_app/main.dart';
 import 'package:car_details_app/register.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class EmailLogin extends StatefulWidget {
 
