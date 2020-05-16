@@ -1,9 +1,6 @@
 import 'package:car_details_app/email_login.dart';
-import 'package:car_details_app/login_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:car_details_app/firebase_auth.dart';
-import 'package:car_details_app/main.dart';
 
 class RegisterEmail extends StatefulWidget {
   @override

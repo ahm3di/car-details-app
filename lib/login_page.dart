@@ -1,4 +1,3 @@
-import 'package:car_details_app/home.dart';
 import 'package:car_details_app/email_login.dart';
 import 'package:car_details_app/main.dart';
 import 'package:flutter/material.dart';

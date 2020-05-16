@@ -1,5 +1,6 @@
 import 'package:car_details_app/login_page.dart';
 import 'package:car_details_app/home.dart';
+import 'package:car_details_app/services_screen.dart';
 import 'package:car_details_app/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainScreen(),
+      home: ServicesScreen(),
     );
   }
 }
