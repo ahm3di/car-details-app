@@ -1,5 +1,5 @@
-import 'package:car_details_app/firebase_auth.dart';
-import 'package:car_details_app/login_page.dart';
+import 'package:car_details_app/widgets/firebase_auth.dart';
+import 'package:car_details_app/screens/login_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,6 +20,11 @@ class HomePage extends StatelessWidget {
                   AuthProvider().logOut();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginOptions()));
                 },
+              ),
+
+              ListTile(
+                leading: Text(''
+                )
               )
             ],
           )

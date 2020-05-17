@@ -1,9 +1,9 @@
-import 'package:car_details_app/login_page.dart';
-import 'package:car_details_app/home.dart';
-import 'package:car_details_app/services_screen.dart';
-import 'package:car_details_app/splash.dart';
+import 'package:car_details_app/screens/login_page.dart';
+import 'package:dropdown_banner/dropdown_banner.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:car_details_app/screens/home.dart';
+import 'package:car_details_app/screens/splash.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ServicesScreen(),
+      home: DropdownBanner(
+        child: LoginOptions(),
+      ),
     );
   }
 }

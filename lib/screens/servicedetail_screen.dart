@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'service_model.dart';
-import 'services.dart';
+import '../models/service_model.dart';
+import '../widgets/services.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
