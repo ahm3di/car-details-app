@@ -1,4 +1,4 @@
-import 'service_model.dart';
+import '../models/service_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
@@ -23,7 +23,6 @@ class Services{
     var lng = coords.longitude.toString();
 
     var response = await http.get(searchUrl+lat+","+lng,headers:{"Accept":"application/json"});
-    print (searchUrl+lat+""+lng);
     var services = <Service>[];
 
     List data = json.decode(response.body)["results"];

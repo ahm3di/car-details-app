@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 class AuthProvider {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -25,7 +24,6 @@ class AuthProvider {
     }catch (e) {
       print("Error while logging out");
     }
-
   }
 
   Future<bool> loginWithGoogle() async {
@@ -37,6 +35,7 @@ class AuthProvider {
       AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.
       getCredential(idToken: (await account.authentication).idToken,
           accessToken: (await account.authentication).accessToken));
+
       if(result.user == null)
         return false;
       return true;
@@ -62,5 +61,13 @@ class AuthProvider {
     }
   }
 
+  Future<bool> resetPassword(String email) async{
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return true;
+    }catch (e){
+      return false;
+    }
+  }
 }
 
