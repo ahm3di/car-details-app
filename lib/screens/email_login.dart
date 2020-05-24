@@ -1,8 +1,7 @@
 import 'package:car_details_app/widgets/firebase_auth.dart';
 import 'package:car_details_app/screens/register.dart';
 import 'package:flutter/material.dart';
-
-import 'home_screen.dart';
+import 'package:car_details_app/screens/home_screen.dart';
 
 class EmailLogin extends StatefulWidget {
   @override

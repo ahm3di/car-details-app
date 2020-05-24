@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
+
 class Services{
   static final _service = new Services();
 
@@ -45,6 +46,7 @@ class Services{
     service.internationalPhoneNumber = result["international_phone_number"];
     service.lat = result["geometry"]["location"]["lat"];
     service.lng = result["geometry"]["location"]["lng"];
+    service.website =result["website"];
 
     List <String> temp = List<String>();
     for(int i=0; i<5; i++){
@@ -58,4 +60,6 @@ class Services{
     return service;
 
   }
+
+
 }

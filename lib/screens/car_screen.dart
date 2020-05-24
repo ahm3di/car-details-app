@@ -8,7 +8,7 @@ import 'package:dropdown_banner/dropdown_banner.dart';
 import 'package:http/http.dart' as http;
 import 'package:car_details_app/widgets/firebase_auth.dart';
 import 'package:car_details_app/screens/login_page.dart';
-import 'home_screen.dart';
+import 'package:car_details_app/screens/home_screen.dart';
 
 class CarDetailsScreen extends StatefulWidget {
   @override

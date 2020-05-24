@@ -1,11 +1,17 @@
+import 'package:dropdown_banner/dropdown_banner.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contact/contacts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/service_model.dart';
 import '../widgets/services.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_contact/contact.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ServiceDetailScreen extends StatefulWidget {
   Service _service;
+
 
   ServiceDetailScreen(this._service);
 
@@ -16,17 +22,22 @@ class ServiceDetailScreen extends StatefulWidget {
 }
 
 class ServiceDetailScreenState extends State<ServiceDetailScreen> {
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget._service.name),
+        actions: [IconButton(icon:Icon(Icons.contact_phone,color: Colors.white,),
+          onPressed: () => phoneOptions()
+        )]
       ),
       body: _createContent(),
     );
   }
 
   Widget _createContent() {
+
     if (_isLoading) {
       return new Center(
         child: new CircularProgressIndicator(),
@@ -35,10 +46,8 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
       return new Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          getCard(
-              "Address", widget._service.formattedAddress, Icons.location_on),
-          getCard("Working hours", widget._service.weekdayText.join("\n"),
-              Icons.work),
+          getCard("Address", widget._service.formattedAddress, Icons.location_on,),
+          getCard("Working hours", widget._service.weekdayText.join("\n"), Icons.work),
           Container(
               child: Expanded(
                   child: ListView(
@@ -59,7 +68,7 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
             highlightColor: Colors.black,
             onPressed: () => MapsLauncher.launchCoordinates(
                 widget._service.lat, widget._service.lng),
-          )
+          ),
         ],
       );
     }
@@ -70,17 +79,16 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
       width: 350,
       child: Card(
           child: Wrap(
-        children: <Widget>[
-          ListTile(
-              title: new Text(customerName, style: new TextStyle(fontWeight: FontWeight.bold),),
-              subtitle: new AutoSizeText(comment,maxLines: 24,),
-              trailing: new Column(
-                children: <Widget>[
-                  new Icon(
-                    Icons.star_border,
-                    color: Colors.yellow,
-                  ),
-                  new Text(rating)
+            children: <Widget>[
+              ListTile(
+                  title: new Text(customerName, style: new TextStyle(fontWeight: FontWeight.bold),),
+                  subtitle: new AutoSizeText(comment,maxLines: 24,),
+                  trailing: new Column(
+                    children: <Widget>[
+                      new Icon(
+                        Icons.star_border,
+                        color: Colors.yellow,
+                      ),new Text(rating)
                 ],
               ))
         ],
@@ -132,5 +140,72 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
         _isLoading = false;
       });
     });
+  }
+
+  void phoneOptions() {
+    List<Item> phone = [];
+    phone.add(Item(value:widget._service.internationalPhoneNumber));
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            title: new Text("Please select an option"),
+            content:
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      IconButton(icon:Icon(Icons.phone,color: Colors.blue),
+                      onPressed: () => launch("tel://"+widget._service.internationalPhoneNumber)),
+                      Text("Call")
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      IconButton(icon:Icon(Icons.contacts,color: Colors.blue),
+                      onPressed: () async {
+                        if(await Permission.contacts.request().isGranted) {
+                          ContactService().addContact(Contact(
+                              givenName: widget._service.name, phones: phone));
+                          Navigator.of(context, rootNavigator: true).pop(
+                              'dialog');
+                          DropdownBanner.showBanner(
+                            text: 'Contact added',
+                            color: Colors.deepPurple[800],
+                            textStyle: TextStyle(
+                                color: Colors.white, fontSize: 28.0),
+                          );
+                        }
+                      }
+                      ),
+                      Text("Save contact")
+                    ],
+                  ),
+                ),
+              ],
+            ),
+        );
+      },
+    );
+  }
+
+  void confirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Contact added"),
+        );
+      },
+    );
   }
 }
