@@ -21,59 +21,97 @@ class _RegisterEmailState extends State<RegisterEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-              padding: const EdgeInsets.all(60.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Register",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50.0,letterSpacing: 2.0)),
-                  SizedBox(height: 20.0),
-                  TextField(
-                      controller: _emailController,
-                      decoration: InputDecoration(hintText: "Enter email")),
-                  SizedBox(height: 10.0),
-                  TextField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(hintText: "Enter password")),
-                  SizedBox(height: 10.0),
-                    RaisedButton(
-                      color:Colors.blue,
-                      child: Text("Register"),
-                      onPressed: () async{
-                        bool result = await AuthProvider().signUpWithEmailAndPassword(
-                            _emailController.text.trim(), _passwordController.text.trim());
-                        if (result) {
-                          print("User registered");
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EmailLogin()));
-                          _showDialog("Email registered", "Please check your inbox for a verification email");
-                        }else {
-                          if(_emailController.text.isEmpty || !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_emailController.text))
-                            _showDialog("Error", "Please fill in the email and password fields correctly");
-
-                          else if(_passwordController.text.trim().length < 6)
-                            _showDialog("Error", "Length of password must be greater than 6");
-
-                          else {
-                            _showDialog("Error", "You have already registerd, please verify your email to login");
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EmailLogin()));
-                          }
-                        }
-                      },
-                    ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EmailLogin()));
-                      },
-                    child: new Text("Already have an account?"),
-                  )
-                ],
-              ),
-            ));
+        body: Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+              colors: [
+            Colors.teal[200],
+            Colors.teal[100],
+            Colors.teal[50],
+            Colors.teal[50],
+            Colors.white
+          ])),
+      padding: const EdgeInsets.all(15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(left: 50, right: 50),
+            child: Image(
+              image: AssetImage('assets/images/logo.png'),
+            ),
+          ),
+          SizedBox(height: 10.0),
+          Container(
+            child: Text(
+              "Register",
+              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(height: 20.0),
+          Container(
+            padding: const EdgeInsets.only(left: 60, right: 60),
+            child: TextField(
+                controller: _emailController,
+                decoration: InputDecoration(hintText: "Enter email")),
+          ),
+          SizedBox(height: 10.0),
+          Container(
+            padding: const EdgeInsets.only(left: 60, right: 60),
+            child: TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: InputDecoration(hintText: "Enter password")),
+          ),
+          SizedBox(height: 30.0),
+          RaisedButton(
+            color: Colors.lightBlueAccent,
+            child: Text("Sign Up"),
+            onPressed: () async {
+              bool result = await AuthProvider().signUpWithEmailAndPassword(
+                  _emailController.text.trim(),
+                  _passwordController.text.trim());
+              if (result) {
+                print("User registered");
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => EmailLogin()));
+                _showDialog("Email registered",
+                    "Please check your inbox for a verification email");
+              } else {
+                if (_emailController.text.isEmpty ||
+                    !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(_emailController.text))
+                  _showDialog("Error",
+                      "Please fill in the email and password fields correctly");
+                else if (_passwordController.text.trim().length < 6)
+                  _showDialog(
+                      "Error", "Length of password must be greater than 6");
+                else {
+                  _showDialog("Error",
+                      "You have already registerd, please verify your email to login");
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => EmailLogin()));
+                }
+              }
+            },
+          ),
+          SizedBox(height: 20.0),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => EmailLogin()));
+            },
+            child: new Text("Already have an account?"),
+          )
+        ],
+      ),
+    ));
   }
-  void _showDialog(String title,String text) {
+
+  void _showDialog(String title, String text) {
     showDialog(
       context: context,
       builder: (BuildContext context) {

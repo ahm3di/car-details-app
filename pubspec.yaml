@@ -29,6 +29,13 @@ dependencies:
   dropdown_banner:
   http:
   font_awesome_flutter: 8.7.0
+  carousel_pro:
+  cloud_firestore:
+  provider:
+  flutter_contact: 0.5.3
+  url_launcher:
+  permission_handler: ^5.0.0+hotfix.6
+  after_layout: ^1.0.7+2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -49,10 +56,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -68,7 +73,7 @@ flutter:
   fonts:
     - family: UKNumberPlate
       fonts:
-        - asset: lib/assets/fonts/UKNumberPlate.ttf
+        - asset: assets/fonts/UKNumberPlate.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

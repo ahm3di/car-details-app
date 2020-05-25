@@ -9,6 +9,7 @@ class Service{
   double lat;
   double lng;
   List<String> review;
+  String website;
 
-  Service(this.name,this.rating,this.vicinity,this.id,[this.internationalPhoneNumber,this.weekdayText,this.formattedAddress,this.lat,this.lng]);
+  Service(this.name,this.rating,this.vicinity,this.id,[this.internationalPhoneNumber,this.weekdayText,this.formattedAddress,this.lat,this.lng,this.website]);
 }

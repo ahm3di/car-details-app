@@ -1,13 +1,16 @@
+import 'package:car_details_app/widgets/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 class AuthProvider {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  static String userID ="";
 
   Future<bool> signInWithEmail(String email, String password) async{
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword
         (email: email, password: password);
       FirebaseUser user = result.user;
+      userID = user.uid;
 
       if(user != null && user.isEmailVerified)
         return true;
@@ -33,8 +36,13 @@ class AuthProvider {
       if (account == null)
         return false;
       AuthResult result = await _auth.signInWithCredential(GoogleAuthProvider.
-      getCredential(idToken: (await account.authentication).idToken,
-          accessToken: (await account.authentication).accessToken));
+      getCredential(idToken: (await account.authentication).idToken,accessToken: (await account.authentication).accessToken));
+      userID = result.user.uid;
+      await DatabaseService(uid: userID).getData();
+//      if(result.additionalUserInfo.isNewUser)
+////        await DatabaseService(uid: result.user.0;).updateUserData("","","","","","",false,false,false,"","","",false);
+//     await cars.addAll(DatabaseService(uid: userID).getData());
+
 
       if(result.user == null)
         return false;
@@ -52,6 +60,7 @@ class AuthProvider {
         (email: email, password: password);
       FirebaseUser user = result.user;
       user.sendEmailVerification();
+//      await DatabaseService(uid: result.user.uid).updateUserData("","","","","","",false,false,false,"","","",false);
       if(user != null)
         return true;
       else

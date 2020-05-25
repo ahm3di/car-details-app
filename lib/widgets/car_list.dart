@@ -14,7 +14,17 @@ class _CarListState extends State<CarList> {
     if (cars.length > 0) {
       cars.sort((a, b) => a.compareTo(b));
       return Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+                  Colors.teal[200],
+                  Colors.teal[100],
+                  Colors.teal[50],
+                  Colors.teal[50],
+                  Colors.white
+                ])),
         child: ListView.builder(
           itemCount: cars.length,
           scrollDirection: Axis.vertical,
@@ -33,7 +43,7 @@ class _CarListState extends State<CarList> {
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
-                      color: Colors.blueGrey[100],
+                      color: Colors.blueGrey[200],
                       width: 1.0,
                     ),
                   ),
@@ -52,7 +62,7 @@ class _CarListState extends State<CarList> {
                               child: Text(
                                 cars[index].make + ' ' + cars[index].model,
                                 style: TextStyle(
-                                  color: Colors.blueGrey,
+                                  color: Colors.deepPurple[800],
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 1.2,
@@ -60,12 +70,12 @@ class _CarListState extends State<CarList> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            SizedBox(height: 10.0),
+                            SizedBox(height: 20.0),
                             Text(
                               cars[index].numberplate.toUpperCase(),
                               style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16.0,
+                                color: Colors.grey[600],
+                                fontSize: 14.0,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 6.0,
                               ),
@@ -95,7 +105,7 @@ class _CarListState extends State<CarList> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              'No Cars Imported.',
+              'No Cars Imported',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24.0,
@@ -105,6 +115,7 @@ class _CarListState extends State<CarList> {
               ),
             ),
           ),
+          Icon(Icons.directions_car, size: 128.0, color: Colors.grey,),
         ],
       );
     }

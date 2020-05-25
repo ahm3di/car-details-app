@@ -1,7 +1,7 @@
 import 'package:car_details_app/widgets/firebase_auth.dart';
 import 'package:car_details_app/screens/register.dart';
-import 'package:car_details_app/screens/car_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:car_details_app/screens/home_screen.dart';
 
 class EmailLogin extends StatefulWidget {
   @override
@@ -22,56 +22,82 @@ class _EmailLoginState extends State<EmailLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-            padding: const EdgeInsets.all(60.0),
+        body: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                  Colors.teal[200],
+                  Colors.teal[100],
+                  Colors.teal[50],
+                  Colors.teal[50],
+                  Colors.white
+                ])),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Login",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 50.0,
-                        letterSpacing: 2)),
-                SizedBox(height: 20.0),
-                TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(hintText: "Enter email")),
+                Container(
+                  padding: const EdgeInsets.only(left: 50, right: 50),
+                  child: Image(
+                    image: AssetImage('assets/images/logo.png'),
+                  ),
+                ),
                 SizedBox(height: 10.0),
-                TextField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(hintText: "Enter password")),
+                Container(
+                  child: new Text(
+                    "Sign In",
+                    style:
+                        TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 60, right: 60),
+                  child: TextField(
+                      controller: _emailController,
+                      decoration: InputDecoration(hintText: "Enter email")),
+                ),
                 SizedBox(height: 10.0),
+                Container(
+                  padding: const EdgeInsets.only(left: 60, right: 60),
+                  child: TextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(hintText: "Enter password")),
+                ),
+                SizedBox(height: 15.0),
                 RaisedButton(
-                  color: Colors.green,
+                  color: Colors.tealAccent[700],
                   child: Text("Login"),
                   onPressed: () async {
                     bool result = await AuthProvider().signInWithEmail(
                         _emailController.text.trim(),
                         _passwordController.text.trim());
                     if (result) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CarDetailsScreen()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeScreen()));
                     } else {
                       if (_emailController.text.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(_emailController.text))
-                        _showDialog("Error", "Please fill in the email and password fields correctly");
-
+                        _showDialog("Error",
+                            "Please fill in the email and password fields correctly");
                       else if (_passwordController.text.trim().length < 6)
-                        _showDialog("Error", "Length of password must be greater than 6");
-
+                        _showDialog("Error",
+                            "Length of password must be greater than 6");
                       else
                         _showDialog("Error",
                             "Error signing in, please make sure you have registered and verified your email");
                     }
                   },
                 ),
-                SizedBox(
-                  width: 10.0,
-                ),
+                SizedBox(height: 5.0),
                 RaisedButton(
-                  color: Colors.blue,
+                  color: Colors.lightBlue,
                   child: Text("Register"),
                   onPressed: () {
                     Navigator.pushReplacement(
@@ -80,17 +106,18 @@ class _EmailLoginState extends State<EmailLogin> {
                             builder: (context) => RegisterEmail()));
                   },
                 ),
+                SizedBox(height: 20.0),
                 GestureDetector(
-                  onTap: () async{
-                    bool result = await AuthProvider().resetPassword(_emailController.text.trim());
-                    if(result){
+                  onTap: () async {
+                    bool result = await AuthProvider()
+                        .resetPassword(_emailController.text.trim());
+                    if (result) {
                       _showDialog("Password Reset",
                           "Please check your email for a link to reset your password");
-                    }
-                    else
+                    } else
                       _showDialog("Error",
                           "Please make sure you entered the correct email address");
-                    },
+                  },
                   child: new Text("Forgot password?"),
                 )
               ],

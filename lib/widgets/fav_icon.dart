@@ -1,6 +1,9 @@
 import 'package:car_details_app/models/car_model.dart';
 import 'package:flutter/material.dart';
 
+import 'database.dart';
+import 'firebase_auth.dart';
+
 class FavIcon extends StatefulWidget {
   final int currentIndex;
   final Function() notifyParent;
@@ -29,10 +32,13 @@ class _FavIconState extends State<FavIcon> {
             cars[currentIndex].setFavourite(false);
             cars.sort((a, b) => a.compareTo(b));
             widget.notifyParent();
+            DatabaseService(uid: AuthProvider.userID).updateFavourite(cars[currentIndex].numberplate,false);
+
           } else {
             cars[currentIndex].setFavourite(true);
             cars.sort((a, b) => a.compareTo(b));
             widget.notifyParent();
+            DatabaseService(uid: AuthProvider.userID).updateFavourite(cars[currentIndex].numberplate,true);
           }
         });
       },
