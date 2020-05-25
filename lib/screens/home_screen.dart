@@ -153,9 +153,7 @@ class _HomeScreenState extends State<HomeScreen>{
         child: Column(
           children: <Widget>[
             new Expanded(
-              flex: 1,
               child: new Container(
-                //height: 150,
                 child: new Carousel(
                   boxFit: BoxFit.fill,
                   images: [
