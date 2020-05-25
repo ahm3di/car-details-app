@@ -1,3 +1,4 @@
+
 import '../models/service_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -60,6 +61,4 @@ class Services{
     return service;
 
   }
-
-
 }

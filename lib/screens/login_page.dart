@@ -61,7 +61,7 @@ class _LoginOptionsState extends State<LoginOptions> {
                 Buttons.GoogleDark,
                 onPressed: () async {
                   bool result = await AuthProvider().loginWithGoogle();
-                  Navigator.pushReplacement(context,
+                  Navigator.push(context,
                       MaterialPageRoute(builder: (context) => HomeScreen()));
                   if (!result) print("Error logging in with google");
                 },

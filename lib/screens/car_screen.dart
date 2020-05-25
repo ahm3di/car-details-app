@@ -83,7 +83,7 @@ class _CarDetailsState extends State<CarDetailsScreen> {
               CustomListTile(
                 Icons.exit_to_app,
                 'Logout',
-                Icons.arrow_left,
+                Icons.arrow_right,
                     () => {
                   AuthProvider().logOut(),
                   Navigator.pushReplacement(context,

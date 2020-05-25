@@ -30,7 +30,11 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
         title: new Text(widget._service.name),
         actions: [IconButton(icon:Icon(Icons.contact_phone,color: Colors.white,),
           onPressed: () => phoneOptions()
-        )]
+        ),
+          IconButton(icon:Icon(Icons.public,color: Colors.white,),
+              onPressed: () => launch(widget._service.website)
+          )],
+
       ),
       body: _createContent(),
     );
@@ -62,7 +66,13 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
             ],
           ))),
           RaisedButton(
-            child: Text("Get Directions"),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Get Directions"),
+                Icon(Icons.location_on,color: Colors.white,)
+              ],
+            ),
             color: Colors.red,
             textColor: Colors.white,
             highlightColor: Colors.black,

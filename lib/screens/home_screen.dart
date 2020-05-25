@@ -1,3 +1,4 @@
+import 'package:car_details_app/models/car_model.dart';
 import 'package:car_details_app/screens/services_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,15 +7,29 @@ import 'package:car_details_app/screens/login_page.dart';
 import 'package:car_details_app/screens/car_screen.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'car_details_screen.dart';
+import 'package:intl/intl.dart';
+import 'package:car_details_app/models/events_model.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>{
+  Map<DateTime,Event> map = {};
+  List orderedDates = [];
+  var sortedMap;
+
+  @override
+  void initState() {
+    sortUpcomingEvents();
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       drawer: Drawer(
           child: ListView(
@@ -89,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomListTile(
             Icons.exit_to_app,
             'Logout',
-            Icons.arrow_left,
+            Icons.arrow_right,
             () => {
               AuthProvider().logOut(),
               Navigator.pushReplacement(context,
@@ -187,7 +202,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       new Container(
-                        margin: new EdgeInsets.symmetric(vertical: 15.0, horizontal: 3.0,),
+                        margin: new EdgeInsets.symmetric(
+                          vertical: 15.0,
+                          horizontal: 3.0,
+                        ),
                         alignment: FractionalOffset.centerLeft,
                         child: new Image(
                           image: new AssetImage("assets/images/car.png"),
@@ -199,41 +217,153 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(top: 16.0, left: 140.0),
                         child: Column(
                           children: <Widget>[
-                            new Text("Useful Links:", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+                            new Text(
+                              "Useful Links:",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             SizedBox(height: 10.0),
                             new InkWell(
-                                child: new Text('AA National Breakdown Recovery', style: TextStyle(color: Colors.lightBlue[200],decoration: TextDecoration.underline)),
+                                child: new Text(
+                                    'AA National Breakdown Recovery',
+                                    style: TextStyle(
+                                        color: Colors.lightBlue[200],
+                                        decoration: TextDecoration.underline)),
                                 onTap: () => launch(
                                     'https://www.theaa.com/breakdown-cover/national-recovery')),
                             SizedBox(height: 10.0),
                             new InkWell(
-                                child: new Text('IAM RoadSmart (Information)', style: TextStyle(color: Colors.lightBlue[200],decoration: TextDecoration.underline)),
+                                child: new Text('IAM RoadSmart (Information)',
+                                    style: TextStyle(
+                                        color: Colors.lightBlue[200],
+                                        decoration: TextDecoration.underline)),
                                 onTap: () =>
                                     launch('https://www.iamroadsmart.com/')),
                             SizedBox(height: 10.0),
                             new InkWell(
-                                child: new Text('Department For Transport', style: TextStyle(color: Colors.lightBlue[200],decoration: TextDecoration.underline)),
+                                child: new Text('Department For Transport',
+                                    style: TextStyle(
+                                        color: Colors.lightBlue[200],
+                                        decoration: TextDecoration.underline)),
                                 onTap: () => launch(
                                     'https://www.gov.uk/government/organisations/department-for-transport')),
                             SizedBox(height: 10.0),
                             new InkWell(
-                                child: new Text('Brake (Road Safety)', style: TextStyle(color: Colors.lightBlue[200],decoration: TextDecoration.underline,)),
-                                onTap: () => launch('http://www.brake.org.uk/')),
+                                child: new Text('Brake (Road Safety)',
+                                    style: TextStyle(
+                                      color: Colors.lightBlue[200],
+                                      decoration: TextDecoration.underline,
+                                    )),
+                                onTap: () =>
+                                    launch('http://www.brake.org.uk/')),
                           ],
                         ),
                       ),
                     ],
                   )),
             ),
-
-            new Expanded(
-              flex: 1,
-              child: new Container(),
+            Padding(
+              padding: const EdgeInsets.only(left:15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text("Upcoming Events",
+                    style:
+                    TextStyle(fontWeight: FontWeight.bold,
+                    fontSize: 25.0),),
+                ],
+              ),
             ),
+            Container(
+                child: Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ListView(
+                        scrollDirection: Axis.vertical,
+                        children: <Widget>[
+                        for(int i=0; i< map.length; i++)
+                          upcomingEvents(i)
+
+                        ],
+                      ),
+                    )))
           ],
         ),
       ),
     );
+  }
+
+  getIntMonth(String s){
+    int month;
+    switch(s.toLowerCase()){
+      case 'januray':
+        month =1;
+        break;
+      case 'february':
+        month =2;
+        break;
+      case 'march':
+        month =3;
+        break;
+      case 'april':
+        month =4;
+        break;
+      case 'may':
+        month =5;
+        break;
+      case 'june':
+        month =6;
+        break;
+      case 'july':
+        month =7;
+        break;
+      case 'august':
+        month =8;
+        break;
+      case 'september':
+        month =9;
+        break;
+      case 'october':
+        month =10;
+        break;
+      case 'november':
+        month =11;
+        break;
+      case 'december':
+        month =12;
+        break;
+    }
+    return month;
+  }
+
+  sortUpcomingEvents() {
+    DateFormat format = DateFormat("dd-MM-yyyy");
+    if(cars.isNotEmpty) {
+      for (int i=0; i<cars.length; i++) {
+        List<String> mot = cars[i].motDetails.split(' ');
+        String motDate = (mot[0]+"-"+getIntMonth(mot[1]).toString()+"-"+mot[2]);
+        map[format.parse(motDate)] = Event(cars[i].motDetails,cars[i],'MOT');
+
+        List<String> tax = cars[i].taxDetails.split(' ');
+        String taxDate = (tax[0]+"-"+getIntMonth(tax[1]).toString()+"-"+tax[2]);
+        map[format.parse(taxDate)] = Event(cars[i].taxDetails,cars[i],'Tax');
+
+        if(cars[i].insuranceDetails != null) {
+          List<String> insurance = cars[i].insuranceDetails.split(' ');
+          String insuranceDate = (insurance[0]+"-"+getIntMonth(insurance[1]).toString()+"-"+insurance[2]);
+          map[format.parse(insuranceDate)] = Event(cars[i].insuranceDetails,cars[i],'Insurance');
+        }
+      }
+      //print(map.toString());
+    }
+    sortedMap = Map.fromEntries(
+        map.entries.toList()
+          ..sort((e1, e2) => e1.key.compareTo(e2.key)));
+    print(sortedMap);
+
+    orderedDates = sortedMap.keys.toList();
   }
 
   void _showDialog(String title, String text) {
@@ -321,7 +451,97 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  String numberPlate(int i){
+    Event e = sortedMap[orderedDates[i]];
+    return e.car.numberplate;
+  }
+
+  String getDueDate(int i){
+    Event e = sortedMap[orderedDates[i]];
+    return e.dateTime;
+  }
+
+  String getEventType(int i){
+    Event e = sortedMap[orderedDates[i]];
+    return e.eventType;
+  }
+  Car getCar(int i){
+    Event e = sortedMap[orderedDates[i]];
+    return e.car;
+  }
+  Container upcomingEvents(int num) {
+    return Container(
+      height: 140,
+      child: Wrap(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              InkWell(
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CarDetails(cars.indexOf(getCar(num))))),
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  decoration: new BoxDecoration(
+                    color: Color(0xffffc40d),
+                    gradient: new LinearGradient(
+                      colors: [Color(0xffffc40d), Color(0xffffde78 /*ffca26*/)],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                    border: new Border.all(
+                      color: Colors.black,
+                      width: 3.0,
+                      style: BorderStyle.solid,
+                    ),
+                    borderRadius:
+                    new BorderRadius.all(new Radius.circular(7.0)),
+                  ),
+                  child: Text(numberPlate(num),
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontFamily: 'UKNumberPlate',
+                      letterSpacing: 2.0,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              InkWell(child: Text(getEventType(num),
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CarDetails(cars.indexOf(getCar(num))))),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              InkWell(child: Text("Date: "+getDueDate(num),
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CarDetails(cars.indexOf(getCar(num))))),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
+
 class CustomListTile extends StatelessWidget {
   IconData icon;
   String text;
@@ -329,9 +549,10 @@ class CustomListTile extends StatelessWidget {
   Function onTap;
 
   CustomListTile(this.icon, this.text, this.iconArrow, this.onTap);
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
     return Padding(
       padding: const EdgeInsets.only(
         left: 8.0,

@@ -81,7 +81,7 @@ class ServicesScreenState extends State<ServicesScreen> {
               CustomListTile(
                 Icons.exit_to_app,
                 'Logout',
-                Icons.arrow_left,
+                Icons.arrow_right,
                     () => {
                   AuthProvider().logOut(),
                   Navigator.pushReplacement(context,

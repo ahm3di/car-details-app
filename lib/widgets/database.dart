@@ -43,16 +43,52 @@ class DatabaseService {
       'isFavourite': isFavourite,
     });
   }
+  Future updateFavourite(
+      String numberplate,
+      bool isFavourite) async {
+    return await carCollection
+        .document(uid)
+        .collection('carCollection')
+        .document(numberplate)
+        .updateData({
+      'numberplate': numberplate,
+      'isFavourite': isFavourite,
+    });
+  }
+  Future updateInsurance(
+      String numberplate,
+      bool insured,
+      String insuranceDetails) async {
+    return await carCollection
+        .document(uid)
+        .collection('carCollection')
+        .document(numberplate)
+        .updateData({
+      'numberplate': numberplate,
+      'insured': insured,
+      'insuranceDetails': insuranceDetails,
+    });
+  }
 
-  getData() {
+  Future deleteData(
+      String numberplate
+      ) async {
+    return await carCollection
+        .document(uid)
+        .collection('carCollection')
+        .document(numberplate)
+        .delete();
+  }
+
+  Future<bool> getData() async{
     cars = new List<Car>();
-    carCollection
+    return await carCollection
         .document(uid)
         .collection('carCollection')
         .getDocuments()
+        // ignore: missing_return
         .then((querySnapshot) {
       querySnapshot.documents.forEach((result) {
-        print("eachRESULT");
         Map<String, dynamic> l = (result.data);
         Car c = new Car(
             numberplate: l['numberplate'],
@@ -68,7 +104,6 @@ class DatabaseService {
             taxDetails: l['taxDetails'],
             insuranceDetails: l['insuranceDetails'],
             isFavourite: l['isFavourite']);
-
         cars.add(c);
       });
     });

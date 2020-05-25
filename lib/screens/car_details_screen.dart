@@ -1,12 +1,13 @@
 import 'dart:ui';
 import 'package:car_details_app/screens/car_screen.dart';
+import 'package:car_details_app/widgets/database.dart';
+import 'package:car_details_app/widgets/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:car_details_app/models/car_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CarDetails extends StatefulWidget {
   final int ind;
-
   CarDetails(this.ind);
 
   @override
@@ -237,6 +238,7 @@ class _CarDetailsState extends State<CarDetails> {
                             ).then((date) {
                               if (date != null) {
                                 cars[widget.ind].setInsurance(date);
+                                DatabaseService(uid: AuthProvider.userID).updateInsurance(cars[widget.ind].numberplate,true,cars[widget.ind].insuranceDetails);
                               }
                               setState(() {});
                             });
@@ -340,6 +342,7 @@ class _CarDetailsState extends State<CarDetails> {
             new FlatButton(
               child: new Text('Yes', style: TextStyle(fontSize: 18.0)),
               onPressed: () {
+                DatabaseService(uid: AuthProvider.userID).deleteData(cars[widget.ind].numberplate);
                 cars.removeAt(widget.ind);
                 Navigator.pushAndRemoveUntil(
                   context,
