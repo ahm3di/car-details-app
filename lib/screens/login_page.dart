@@ -63,7 +63,11 @@ class _LoginOptionsState extends State<LoginOptions> {
                   bool result = await AuthProvider().loginWithGoogle();
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => HomeScreen()));
-                  if (!result) print("Error logging in with google");
+                  if (!result) {
+                    print("Error logging in with google");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginOptions()));
+                  }
                 },
               ),
             ),

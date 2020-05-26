@@ -11,6 +11,7 @@ class AuthProvider {
         (email: email, password: password);
       FirebaseUser user = result.user;
       userID = user.uid;
+      await DatabaseService(uid: userID).getData();
 
       if(user != null && user.isEmailVerified)
         return true;
@@ -39,9 +40,6 @@ class AuthProvider {
       getCredential(idToken: (await account.authentication).idToken,accessToken: (await account.authentication).accessToken));
       userID = result.user.uid;
       await DatabaseService(uid: userID).getData();
-//      if(result.additionalUserInfo.isNewUser)
-////        await DatabaseService(uid: result.user.0;).updateUserData("","","","","","",false,false,false,"","","",false);
-//     await cars.addAll(DatabaseService(uid: userID).getData());
 
 
       if(result.user == null)
@@ -60,7 +58,7 @@ class AuthProvider {
         (email: email, password: password);
       FirebaseUser user = result.user;
       user.sendEmailVerification();
-//      await DatabaseService(uid: result.user.uid).updateUserData("","","","","","",false,false,false,"","","",false);
+
       if(user != null)
         return true;
       else

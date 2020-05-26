@@ -232,10 +232,6 @@ class _CarDetailsState extends State<CarDetailsScreen> {
                   );
                   if (await _fetchCarDetails(motInput)) {
                     Navigator.of(context).pop();
-//                    Navigator.push(
-//                        context,
-//                        MaterialPageRoute(
-//                            builder: (context) => CarDetails(cars.length - 1)));
                   } else {
                     DropdownBanner.showBanner(
                       text: 'Could Not Find Vehicle.',

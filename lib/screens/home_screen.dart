@@ -153,9 +153,7 @@ class _HomeScreenState extends State<HomeScreen>{
         child: Column(
           children: <Widget>[
             new Expanded(
-              flex: 1,
               child: new Container(
-                //height: 150,
                 child: new Carousel(
                   boxFit: BoxFit.fill,
                   images: [
@@ -215,50 +213,52 @@ class _HomeScreenState extends State<HomeScreen>{
                       ),
                       new Container(
                         padding: const EdgeInsets.only(top: 16.0, left: 140.0),
-                        child: Column(
-                          children: <Widget>[
-                            new Text(
-                              "Useful Links:",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              new Text(
+                                "Useful Links:",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 10.0),
-                            new InkWell(
-                                child: new Text(
-                                    'AA National Breakdown Recovery',
-                                    style: TextStyle(
+                              SizedBox(height: 10.0),
+                              new InkWell(
+                                  child: new Text(
+                                      'AA National Breakdown Recovery',
+                                      style: TextStyle(
+                                          color: Colors.lightBlue[200],
+                                          decoration: TextDecoration.underline)),
+                                  onTap: () => launch(
+                                      'https://www.theaa.com/breakdown-cover/national-recovery')),
+                              SizedBox(height: 10.0),
+                              new InkWell(
+                                  child: new Text('IAM RoadSmart (Information)',
+                                      style: TextStyle(
+                                          color: Colors.lightBlue[200],
+                                          decoration: TextDecoration.underline)),
+                                  onTap: () =>
+                                      launch('https://www.iamroadsmart.com/')),
+                              SizedBox(height: 10.0),
+                              new InkWell(
+                                  child: new Text('Department For Transport',
+                                      style: TextStyle(
+                                          color: Colors.lightBlue[200],
+                                          decoration: TextDecoration.underline)),
+                                  onTap: () => launch(
+                                      'https://www.gov.uk/government/organisations/department-for-transport')),
+                              SizedBox(height: 10.0),
+                              new InkWell(
+                                  child: new Text('Brake (Road Safety)',
+                                      style: TextStyle(
                                         color: Colors.lightBlue[200],
-                                        decoration: TextDecoration.underline)),
-                                onTap: () => launch(
-                                    'https://www.theaa.com/breakdown-cover/national-recovery')),
-                            SizedBox(height: 10.0),
-                            new InkWell(
-                                child: new Text('IAM RoadSmart (Information)',
-                                    style: TextStyle(
-                                        color: Colors.lightBlue[200],
-                                        decoration: TextDecoration.underline)),
-                                onTap: () =>
-                                    launch('https://www.iamroadsmart.com/')),
-                            SizedBox(height: 10.0),
-                            new InkWell(
-                                child: new Text('Department For Transport',
-                                    style: TextStyle(
-                                        color: Colors.lightBlue[200],
-                                        decoration: TextDecoration.underline)),
-                                onTap: () => launch(
-                                    'https://www.gov.uk/government/organisations/department-for-transport')),
-                            SizedBox(height: 10.0),
-                            new InkWell(
-                                child: new Text('Brake (Road Safety)',
-                                    style: TextStyle(
-                                      color: Colors.lightBlue[200],
-                                      decoration: TextDecoration.underline,
-                                    )),
-                                onTap: () =>
-                                    launch('http://www.brake.org.uk/')),
-                          ],
+                                        decoration: TextDecoration.underline,
+                                      )),
+                                  onTap: () =>
+                                      launch('http://www.brake.org.uk/')),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -356,13 +356,11 @@ class _HomeScreenState extends State<HomeScreen>{
           map[format.parse(insuranceDate)] = Event(cars[i].insuranceDetails,cars[i],'Insurance');
         }
       }
-      //print(map.toString());
+
     }
     sortedMap = Map.fromEntries(
         map.entries.toList()
           ..sort((e1, e2) => e1.key.compareTo(e2.key)));
-    print(sortedMap);
-
     orderedDates = sortedMap.keys.toList();
   }
 
