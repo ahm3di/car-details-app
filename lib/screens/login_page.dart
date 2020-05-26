@@ -68,7 +68,6 @@ class _LoginOptionsState extends State<LoginOptions> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginOptions()));
                   }
-
                 },
               ),
             ),
