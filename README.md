@@ -1,11 +1,24 @@
 # Car Details
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![Contributors](https://img.shields.io/badge/contributors-2-orange.svg?style=flat)](#contributors-)
+![License](https://img.shields.io/github/license/ahm3di/car_details_app.svg)
+![Last Commit](https://img.shields.io/github/last-commit/ahm3di/car_details_app)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Flutter app which allows users to store and retrieve important vehicle information
-by entering the number plate. This group project was created in fulfilment of the following module: CN6211 - 
-Mobile App Development.
+by entering the number plate. This group project was created in fulfilment of 
+the Mobile App Development module.
 
+## Screenshots
+<p align="left">
+<img src="https://user-images.githubusercontent.com/45081478/132925438-f7294792-c754-4c21-96e3-246b474d047f.jpg" width="32%">
+<img src="https://user-images.githubusercontent.com/45081478/132925884-3b6a2279-b51d-4f94-95d3-d22821c5f267.jpg" width="32%">
+<img src="https://user-images.githubusercontent.com/45081478/132925929-d023b3ee-ede8-4ede-ba9d-4a8d1aea37c6.jpg" width="32%">
+<img src="https://user-images.githubusercontent.com/45081478/132926039-65454c0e-8472-4bea-8c96-b16b298c1dc2.jpg" width="32%">
+<img src="https://user-images.githubusercontent.com/45081478/132926061-859ee1b6-27cc-49f4-8e44-42c4fa769473.jpg" width="32%">
+<img src="https://user-images.githubusercontent.com/45081478/132926087-3e8b030d-f764-4821-9ea1-fe75e4f14556.jpg" width="32%">
+</p>
+                                                                                                                            
 ## Setup
 - Install [Flutter](https://flutter.dev/docs/get-started/install)
 - Download or clone this repository
@@ -20,7 +33,9 @@ Mobile App Development.
 [DVLASearch](http://api.vehicle-search.co.uk/#/Search/Licence_Plate) API <br>
 `NOTE: The API trial only supports number plates beginning with MT09 and FH51`
 - Data storage using [Firestore](https://firebase.flutter.dev/docs/firestore/usage/) database
-- Display nearby service locations using [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) 
+<br> `NOTE: To connect to your own Firestore database, create a project and replace
+'google-services.json' in 'android -> app -> src'`
+- Display nearby vehicle service locations using [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) 
 <br> `NOTE: The API key is limited for demonstration purposes, to use your own
 key replace 'placesAPIkey' in 'services.dart'`
 ## Contributors ✨
