@@ -17,6 +17,17 @@
         "userTesting",
         "doc"
       ]
+    },
+    {
+      "login": "christophercatt",
+      "name": "Chris Catt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47675714?v=4",
+      "profile": "http://chriscatt.com",
+      "contributions": [
+        "ideas",
+        "code",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
