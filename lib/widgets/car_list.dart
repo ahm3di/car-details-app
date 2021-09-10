@@ -19,12 +19,12 @@ class _CarListState extends State<CarList> {
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
                 colors: [
-                  Colors.teal[200],
-                  Colors.teal[100],
-                  Colors.teal[50],
-                  Colors.teal[50],
-                  Colors.white
-                ])),
+              Colors.teal[200],
+              Colors.teal[100],
+              Colors.teal[50],
+              Colors.teal[50],
+              Colors.white
+            ])),
         child: ListView.builder(
           itemCount: cars.length,
           scrollDirection: Axis.vertical,
@@ -115,7 +115,11 @@ class _CarListState extends State<CarList> {
               ),
             ),
           ),
-          Icon(Icons.directions_car, size: 128.0, color: Colors.grey,),
+          Icon(
+            Icons.directions_car,
+            size: 128.0,
+            color: Colors.grey,
+          ),
         ],
       );
     }

@@ -1,16 +1,22 @@
-# car_details_app
+# Car Details
+Flutter app which allows users to store and retrieve important vehicle information
+by entering the number plate. This group project was created in fulfilment of the following module: CN6211 - 
+Mobile App Development.
 
-A new Flutter project.
+## Setup
+- Install [Flutter](https://flutter.dev/docs/get-started/install)
+- Download or clone this repository
+- Connect device or emulator to IDE
+- Switch working directory to `car_details_app` and run:
+    - `flutter pub get`
+    - `flutter run`
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+- User authentication using [Firebase](https://firebase.google.com/docs/flutter/setup?platform=android)
+- Retrieve vehicle information using 
+[DVLASearch](http://api.vehicle-search.co.uk/#/Search/Licence_Plate) API <br>
+`NOTE: The API trial only supports number plates beginning with MT09 and FH51`
+- Data storage using [Firestore](https://firebase.flutter.dev/docs/firestore/usage/) database
+- Display nearby service locations using [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) 
+<br> `NOTE: The API key is limited for demonstration purposes, to use your own
+key replace 'placesAPIkey' in 'services.dart'`
