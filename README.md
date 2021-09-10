@@ -10,13 +10,15 @@ by entering the number plate. This group project was created in fulfilment of
 the Mobile App Development module.
 
 ## Screenshots
+<p align="left">
 <img src="https://user-images.githubusercontent.com/45081478/132925438-f7294792-c754-4c21-96e3-246b474d047f.jpg" width="32%">
 <img src="https://user-images.githubusercontent.com/45081478/132925884-3b6a2279-b51d-4f94-95d3-d22821c5f267.jpg" width="32%">
 <img src="https://user-images.githubusercontent.com/45081478/132925929-d023b3ee-ede8-4ede-ba9d-4a8d1aea37c6.jpg" width="32%">
 <img src="https://user-images.githubusercontent.com/45081478/132926039-65454c0e-8472-4bea-8c96-b16b298c1dc2.jpg" width="32%">
 <img src="https://user-images.githubusercontent.com/45081478/132926061-859ee1b6-27cc-49f4-8e44-42c4fa769473.jpg" width="32%">
 <img src="https://user-images.githubusercontent.com/45081478/132926087-3e8b030d-f764-4821-9ea1-fe75e4f14556.jpg" width="32%">
-
+</p>
+                                                                                                                            
 ## Setup
 - Install [Flutter](https://flutter.dev/docs/get-started/install)
 - Download or clone this repository
