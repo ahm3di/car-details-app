@@ -16,8 +16,8 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>{
-  Map<DateTime,Event> map = {};
+class _HomeScreenState extends State<HomeScreen> {
+  Map<DateTime, Event> map = {};
   List orderedDates = [];
   var sortedMap;
 
@@ -25,11 +25,10 @@ class _HomeScreenState extends State<HomeScreen>{
   void initState() {
     sortUpcomingEvents();
     super.initState();
-
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       drawer: Drawer(
           child: ListView(
@@ -229,7 +228,8 @@ class _HomeScreenState extends State<HomeScreen>{
                                       'AA National Breakdown Recovery',
                                       style: TextStyle(
                                           color: Colors.lightBlue[200],
-                                          decoration: TextDecoration.underline)),
+                                          decoration:
+                                              TextDecoration.underline)),
                                   onTap: () => launch(
                                       'https://www.theaa.com/breakdown-cover/national-recovery')),
                               SizedBox(height: 10.0),
@@ -237,7 +237,8 @@ class _HomeScreenState extends State<HomeScreen>{
                                   child: new Text('IAM RoadSmart (Information)',
                                       style: TextStyle(
                                           color: Colors.lightBlue[200],
-                                          decoration: TextDecoration.underline)),
+                                          decoration:
+                                              TextDecoration.underline)),
                                   onTap: () =>
                                       launch('https://www.iamroadsmart.com/')),
                               SizedBox(height: 10.0),
@@ -245,7 +246,8 @@ class _HomeScreenState extends State<HomeScreen>{
                                   child: new Text('Department For Transport',
                                       style: TextStyle(
                                           color: Colors.lightBlue[200],
-                                          decoration: TextDecoration.underline)),
+                                          decoration:
+                                              TextDecoration.underline)),
                                   onTap: () => launch(
                                       'https://www.gov.uk/government/organisations/department-for-transport')),
                               SizedBox(height: 10.0),
@@ -265,74 +267,73 @@ class _HomeScreenState extends State<HomeScreen>{
                   )),
             ),
             Padding(
-              padding: const EdgeInsets.only(left:15.0),
+              padding: const EdgeInsets.only(left: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("Upcoming Events",
+                  Text(
+                    "Upcoming Events",
                     style:
-                    TextStyle(fontWeight: FontWeight.bold,
-                    fontSize: 25.0),),
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                  ),
                 ],
               ),
             ),
             Container(
                 child: Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: ListView(
-                        scrollDirection: Axis.vertical,
-                        children: <Widget>[
-                        for(int i=0; i< map.length; i++)
-                          upcomingEvents(i)
-
-                        ],
-                      ),
-                    )))
+              padding: const EdgeInsets.all(20.0),
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: <Widget>[
+                  for (int i = 0; i < map.length; i++) upcomingEvents(i)
+                ],
+              ),
+            )))
           ],
         ),
       ),
     );
   }
 
-  getIntMonth(String s){
+  getIntMonth(String s) {
     int month;
-    switch(s.toLowerCase()){
+    switch (s.toLowerCase()) {
       case 'januray':
-        month =1;
+        month = 1;
         break;
       case 'february':
-        month =2;
+        month = 2;
         break;
       case 'march':
-        month =3;
+        month = 3;
         break;
       case 'april':
-        month =4;
+        month = 4;
         break;
       case 'may':
-        month =5;
+        month = 5;
         break;
       case 'june':
-        month =6;
+        month = 6;
         break;
       case 'july':
-        month =7;
+        month = 7;
         break;
       case 'august':
-        month =8;
+        month = 8;
         break;
       case 'september':
-        month =9;
+        month = 9;
         break;
       case 'october':
-        month =10;
+        month = 10;
         break;
       case 'november':
-        month =11;
+        month = 11;
         break;
       case 'december':
-        month =12;
+        month = 12;
         break;
     }
     return month;
@@ -340,27 +341,32 @@ class _HomeScreenState extends State<HomeScreen>{
 
   sortUpcomingEvents() {
     DateFormat format = DateFormat("dd-MM-yyyy");
-    if(cars.isNotEmpty) {
-      for (int i=0; i<cars.length; i++) {
+    if (cars.isNotEmpty) {
+      for (int i = 0; i < cars.length; i++) {
         List<String> mot = cars[i].motDetails.split(' ');
-        String motDate = (mot[0]+"-"+getIntMonth(mot[1]).toString()+"-"+mot[2]);
-        map[format.parse(motDate)] = Event(cars[i].motDetails,cars[i],'MOT');
+        String motDate =
+            (mot[0] + "-" + getIntMonth(mot[1]).toString() + "-" + mot[2]);
+        map[format.parse(motDate)] = Event(cars[i].motDetails, cars[i], 'MOT');
 
         List<String> tax = cars[i].taxDetails.split(' ');
-        String taxDate = (tax[0]+"-"+getIntMonth(tax[1]).toString()+"-"+tax[2]);
-        map[format.parse(taxDate)] = Event(cars[i].taxDetails,cars[i],'Tax');
+        String taxDate =
+            (tax[0] + "-" + getIntMonth(tax[1]).toString() + "-" + tax[2]);
+        map[format.parse(taxDate)] = Event(cars[i].taxDetails, cars[i], 'Tax');
 
-        if(cars[i].insuranceDetails != null) {
+        if (cars[i].insuranceDetails != null) {
           List<String> insurance = cars[i].insuranceDetails.split(' ');
-          String insuranceDate = (insurance[0]+"-"+getIntMonth(insurance[1]).toString()+"-"+insurance[2]);
-          map[format.parse(insuranceDate)] = Event(cars[i].insuranceDetails,cars[i],'Insurance');
+          String insuranceDate = (insurance[0] +
+              "-" +
+              getIntMonth(insurance[1]).toString() +
+              "-" +
+              insurance[2]);
+          map[format.parse(insuranceDate)] =
+              Event(cars[i].insuranceDetails, cars[i], 'Insurance');
         }
       }
-
     }
     sortedMap = Map.fromEntries(
-        map.entries.toList()
-          ..sort((e1, e2) => e1.key.compareTo(e2.key)));
+        map.entries.toList()..sort((e1, e2) => e1.key.compareTo(e2.key)));
     orderedDates = sortedMap.keys.toList();
   }
 
@@ -449,24 +455,26 @@ class _HomeScreenState extends State<HomeScreen>{
     );
   }
 
-  String numberPlate(int i){
+  String numberPlate(int i) {
     Event e = sortedMap[orderedDates[i]];
     return e.car.numberplate;
   }
 
-  String getDueDate(int i){
+  String getDueDate(int i) {
     Event e = sortedMap[orderedDates[i]];
     return e.dateTime;
   }
 
-  String getEventType(int i){
+  String getEventType(int i) {
     Event e = sortedMap[orderedDates[i]];
     return e.eventType;
   }
-  Car getCar(int i){
+
+  Car getCar(int i) {
     Event e = sortedMap[orderedDates[i]];
     return e.car;
   }
+
   Container upcomingEvents(int num) {
     return Container(
       height: 140,
@@ -476,8 +484,11 @@ class _HomeScreenState extends State<HomeScreen>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CarDetails(cars.indexOf(getCar(num))))),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            CarDetails(cars.indexOf(getCar(num))))),
                 child: Container(
                   padding: EdgeInsets.all(10.0),
                   decoration: new BoxDecoration(
@@ -493,9 +504,10 @@ class _HomeScreenState extends State<HomeScreen>{
                       style: BorderStyle.solid,
                     ),
                     borderRadius:
-                    new BorderRadius.all(new Radius.circular(7.0)),
+                        new BorderRadius.all(new Radius.circular(7.0)),
                   ),
-                  child: Text(numberPlate(num),
+                  child: Text(
+                    numberPlate(num),
                     style: TextStyle(
                       fontSize: 30.0,
                       fontFamily: 'UKNumberPlate',
@@ -509,28 +521,38 @@ class _HomeScreenState extends State<HomeScreen>{
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              InkWell(child: Text(getEventType(num),
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.w600,
+              InkWell(
+                child: Text(
+                  getEventType(num),
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CarDetails(cars.indexOf(getCar(num))))),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            CarDetails(cars.indexOf(getCar(num))))),
               ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              InkWell(child: Text("Date: "+getDueDate(num),
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w600,
+              InkWell(
+                child: Text(
+                  "Date: " + getDueDate(num),
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CarDetails(cars.indexOf(getCar(num))))),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            CarDetails(cars.indexOf(getCar(num))))),
               ),
             ],
           ),
@@ -550,7 +572,6 @@ class CustomListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.only(
         left: 8.0,

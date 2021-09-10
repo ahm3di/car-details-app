@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CarDetails extends StatefulWidget {
   final int ind;
+
   CarDetails(this.ind);
 
   @override
@@ -154,7 +155,6 @@ class _CarDetailsState extends State<CarDetails> {
                           ),
                         ),
                       ),
-
                       Text(
                         capitalize(cars[widget.ind].transmission),
                         style: TextStyle(
@@ -238,7 +238,11 @@ class _CarDetailsState extends State<CarDetails> {
                             ).then((date) {
                               if (date != null) {
                                 cars[widget.ind].setInsurance(date);
-                                DatabaseService(uid: AuthProvider.userID).updateInsurance(cars[widget.ind].numberplate,true,cars[widget.ind].insuranceDetails);
+                                DatabaseService(uid: AuthProvider.userID)
+                                    .updateInsurance(
+                                        cars[widget.ind].numberplate,
+                                        true,
+                                        cars[widget.ind].insuranceDetails);
                               }
                               setState(() {});
                             });
@@ -283,10 +287,10 @@ class _CarDetailsState extends State<CarDetails> {
   }
 
   String capitalize(String s) {
-    if(s != "") {
+    if (s != "") {
       s = s.toLowerCase();
       return s[0].toUpperCase() + s.substring(1);
-    }else{
+    } else {
       return "Unknown";
     }
   }
@@ -342,7 +346,8 @@ class _CarDetailsState extends State<CarDetails> {
             new FlatButton(
               child: new Text('Yes', style: TextStyle(fontSize: 18.0)),
               onPressed: () {
-                DatabaseService(uid: AuthProvider.userID).deleteData(cars[widget.ind].numberplate);
+                DatabaseService(uid: AuthProvider.userID)
+                    .deleteData(cars[widget.ind].numberplate);
                 cars.removeAt(widget.ind);
                 Navigator.pushAndRemoveUntil(
                   context,

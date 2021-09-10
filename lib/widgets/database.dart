@@ -43,9 +43,8 @@ class DatabaseService {
       'isFavourite': isFavourite,
     });
   }
-  Future updateFavourite(
-      String numberplate,
-      bool isFavourite) async {
+
+  Future updateFavourite(String numberplate, bool isFavourite) async {
     return await carCollection
         .document(uid)
         .collection('carCollection')
@@ -55,10 +54,9 @@ class DatabaseService {
       'isFavourite': isFavourite,
     });
   }
+
   Future updateInsurance(
-      String numberplate,
-      bool insured,
-      String insuranceDetails) async {
+      String numberplate, bool insured, String insuranceDetails) async {
     return await carCollection
         .document(uid)
         .collection('carCollection')
@@ -70,9 +68,7 @@ class DatabaseService {
     });
   }
 
-  Future deleteData(
-      String numberplate
-      ) async {
+  Future deleteData(String numberplate) async {
     return await carCollection
         .document(uid)
         .collection('carCollection')
@@ -80,7 +76,7 @@ class DatabaseService {
         .delete();
   }
 
-  Future<bool> getData() async{
+  Future<bool> getData() async {
     cars = new List<Car>();
     return await carCollection
         .document(uid)
