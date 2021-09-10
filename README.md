@@ -1,6 +1,6 @@
 # Car Details
-Flutter app which allows users to retrieve and store important information about
-a vehicle by entering the number plate. This group project was created in fulfilment of the following module: CN6211 - 
+Flutter app which allows users to store and retrieve important vehicle information
+by entering the number plate. This group project was created in fulfilment of the following module: CN6211 - 
 Mobile App Development.
 
 ## Setup
