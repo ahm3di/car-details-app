@@ -1,6 +1,6 @@
 # Car Details
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Flutter app which allows users to store and retrieve important vehicle information
 by entering the number plate. This group project was created in fulfilment of the following module: CN6211 - 
@@ -34,6 +34,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/talia123"><img src="https://avatars.githubusercontent.com/u/36270763?v=4?s=100" width="100px;" alt=""/><br /><sub><b>talia123</b></sub></a><br /><a href="#ideas-talia123" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/ahm3di/car_details_app/commits?author=talia123" title="Code">💻</a> <a href="#design-talia123" title="Design">🎨</a> <a href="#userTesting-talia123" title="User Testing">📓</a> <a href="https://github.com/ahm3di/car_details_app/commits?author=talia123" title="Documentation">📖</a></td>
     <td align="center"><a href="http://chriscatt.com"><img src="https://avatars.githubusercontent.com/u/47675714?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chris Catt</b></sub></a><br /><a href="#ideas-christophercatt" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/ahm3di/car_details_app/commits?author=christophercatt" title="Code">💻</a> <a href="#design-christophercatt" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/keerthy"><img src="https://avatars.githubusercontent.com/u/691581?v=4?s=100" width="100px;" alt=""/><br /><sub><b>keerthy-opt</b></sub></a><br /><a href="#ideas-Keerthy" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/ahm3di/car_details_app/commits?author=Keerthy" title="Documentation">📖</a></td>
   </tr>
 </table>
 
