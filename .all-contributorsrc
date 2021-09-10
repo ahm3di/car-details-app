@@ -1,0 +1,28 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "talia123",
+      "name": "talia123",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36270763?v=4",
+      "profile": "https://github.com/talia123",
+      "contributions": [
+        "ideas",
+        "code",
+        "design",
+        "userTesting",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "car_details_app",
+  "projectOwner": "ahm3di",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
